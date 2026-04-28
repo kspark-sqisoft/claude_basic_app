@@ -7,6 +7,7 @@ import '../providers/todo_list_notifier.dart';
 import '../widgets/todo_filter_tabs.dart';
 import '../widgets/todo_input_bar.dart';
 import '../widgets/todo_list_item.dart';
+import '../widgets/todo_search_field.dart';
 
 // 메인 화면. 좌측 정렬 1024px 고정폭 컬럼으로 입력 → 필터 → 목록을 수직 배치한다.
 class TodoListScreen extends ConsumerWidget {
@@ -19,7 +20,10 @@ class TodoListScreen extends ConsumerWidget {
     final colors = context.theme.colors;
 
     return FScaffold(
-      header: const FHeader(title: Text('Todo')),
+      header: const FHeader(
+        title: Text('Todo'),
+        suffixes: [TodoSearchField()],
+      ),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1024),
         child: Column(
