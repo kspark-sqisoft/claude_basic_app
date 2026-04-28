@@ -1,0 +1,64 @@
+{
+  "project": "claude_basic_app",
+  "phase": "0-mvp",
+  "steps": [
+    {
+      "step": 0,
+      "name": "project-setup",
+      "status": "completed",
+      "started_at": "2026-04-28T13:44:20+0900",
+      "summary": "Flutter 프로젝트 초기화 완료. pubspec.yaml에 forui ^0.21.3, sembast, flutter_riverpod, freezed, fpdart, uuid 등 의존성 추가. lib/main.dart에 빈 ProviderScope 골격 작성. flutter analyze/test 통과.",
+      "completed_at": "2026-04-28T13:49:50+0900"
+    },
+    {
+      "step": 1,
+      "name": "app-shell",
+      "status": "completed",
+      "started_at": "2026-04-28T13:49:50+0900",
+      "summary": "lib/app/{theme,app,router}.dart 작성. forui FTheme(zinc, 시스템 모드) 적용. routerProvider(@riverpod) 단일 라우트로 자리표시자 TodoListScreen 노출. FScaffold + FHeader 사용. windows/runner/main.cpp 창 크기 1024x640. build_runner 1차 실행으로 *.g.dart 생성.",
+      "completed_at": "2026-04-28T13:56:18+0900"
+    },
+    {
+      "step": 2,
+      "name": "core-foundation",
+      "status": "completed",
+      "started_at": "2026-04-28T13:56:18+0900",
+      "summary": "core 레이어 작성. Failure(sealed: DatabaseFailure/ValidationFailure/UnexpectedFailure), CacheException, UseCase<R,P>/StreamUseCase<R,P> 베이스, appDatabaseProvider(@Riverpod keepAlive=true, sembast_io). Failure 동등성 + sembast provider override 테스트 통과.",
+      "completed_at": "2026-04-28T14:02:11+0900"
+    },
+    {
+      "step": 3,
+      "name": "todos-domain",
+      "status": "completed",
+      "started_at": "2026-04-28T14:02:11+0900",
+      "summary": "todos/domain 레이어 작성. Todo entity(freezed), TodoRepository 인터페이스, UseCase 5종(WatchTodos/AddTodo/UpdateTodo/DeleteTodo/ToggleTodoCompleted) 모두 Either<Failure,T> 반환. uuid/now 주입식 + ValidationFailure 검증. 모든 단위 테스트 통과.",
+      "completed_at": "2026-04-28T14:09:51+0900"
+    },
+    {
+      "step": 4,
+      "name": "todos-data",
+      "status": "completed",
+      "started_at": "2026-04-28T14:09:51+0900",
+      "summary": "todos/data 레이어 작성. TodoModel(freezed+json_serializable, epoch ms 시간), TodoLocalDataSource(stringMapStoreFactory store('todos'), CacheException throw), TodoRepositoryImpl(StreamTransformer로 Either 변환), todoLocalDataSource/todoRepository provider(@riverpod). databaseFactoryMemory 기반 CRUD 테스트 통과.",
+      "completed_at": "2026-04-28T14:15:50+0900"
+    },
+    {
+      "step": 5,
+      "name": "todos-presentation",
+      "status": "completed",
+      "started_at": "2026-04-28T14:15:51+0900",
+      "summary": "todos/presentation 레이어 작성. TodoFilterNotifier(@riverpod, enum: all/pending/completed)와 TodoListNotifier(@riverpod, Stream<List<Todo>>)로 필터·목록 분리. TodoListScreen(FScaffold+FHeader+ConstrainedBox 1024px) + TodoInputBar/TodoFilterTabs(FTabs lifted)/TodoListItem(FCheckbox+lineThrough)/TodoEditDialog(FDialog + FCalendar) 위젯. FakeTodoRepository 기반 위젯 테스트 9건 + 전체 47건 통과, flutter analyze 0건, flutter build windows --debug 성공.",
+      "completed_at": "2026-04-28T14:30:00+0900"
+    },
+    {
+      "step": 6,
+      "name": "final-verification",
+      "status": "completed",
+      "started_at": "2026-04-28T14:47:38+0900",
+      "summary": "MVP 전체 검증 통과: flutter analyze 0경고, 전체 47건 테스트 통과, flutter build windows --debug 성공. README.md 확장(스택/구조/실행/개발 커맨드). 수동 시나리오는 별도 검증 권장.",
+      "completed_at": "2026-04-28T14:52:02+0900"
+    }
+  ],
+  "created_at": "2026-04-28T13:44:20+0900",
+  "completed_at": "2026-04-28T14:52:03+0900"
+}
