@@ -13,7 +13,10 @@
     {
       "step": 1,
       "name": "app-shell",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-04-28T13:49:50+0900",
+      "summary": "lib/app/{theme,app,router}.dart 작성. forui FTheme(zinc, 시스템 모드) 적용. routerProvider(@riverpod) 단일 라우트로 자리표시자 TodoListScreen 노출. FScaffold + FHeader 사용. windows/runner/main.cpp 창 크기 1024x640. build_runner 1차 실행으로 *.g.dart 생성.",
+      "completed_at": "2026-04-28T14:05:00+0900"
     },
     {
       "step": 2,

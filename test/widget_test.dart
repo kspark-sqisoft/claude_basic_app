@@ -1,20 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:claude_basic_app/app/app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('bootstrap placeholder renders', (tester) async {
-    // 부트스트랩 골격이 ProviderScope 아래에서 정상적으로 빌드되는지 확인
-    await tester.pumpWidget(
-      const ProviderScope(
-        child: MaterialApp(
-          home: Scaffold(
-            body: Center(child: Text('claude_basic_app — bootstrap')),
-          ),
-        ),
-      ),
-    );
-
-    expect(find.text('claude_basic_app — bootstrap'), findsOneWidget);
+  testWidgets('TodoApp boots and renders header', (tester) async {
+    // ProviderScope 아래에서 TodoApp이 빌드되고 'Todo' 헤더가 보이는지 확인
+    await tester.pumpWidget(const ProviderScope(child: TodoApp()));
+    await tester.pump();
+    expect(find.text('Todo'), findsOneWidget);
   });
 }
