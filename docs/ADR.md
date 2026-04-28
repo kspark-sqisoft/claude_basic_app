@@ -39,3 +39,8 @@
 **결정**: UI 컴포넌트 라이브러리로 `forui ^0.21.3`(zinc 팔레트)을 도입한다. `MaterialApp.router`의 `builder`에서 `FTheme(FToaster(FTooltipGroup(child)))`로 래핑하고, 시스템 brightness에 따라 `FThemes.zinc.light.desktop` / `.dark.desktop`을 선택한다. 다이얼로그는 `showAdaptiveDialog` + `FDialog` 조합을 사용한다.
 **이유**: shadcn/ui 영감의 미니멀 톤이 Material의 모바일 톤보다 데스크톱 워크스테이션 도구 컨셉에 부합한다(정보 밀도, 무채색 + 단일 포인트). forui는 데스크톱·터치 양쪽 변형(`.desktop`/`.touch`)을 제공하고, Material 위젯과 공존 가능해 점진 도입이 안전하다.
 **트레이드오프**: forui는 0.x 메이저 전 단계라 minor 업데이트에서 API 변경 위험. 일부 진입점(`MaterialApp.router`, `showAdaptiveDialog`)은 Material을 그대로 써야 해 두 시스템이 공존한다. 팀 학습 곡선 일부 증가.
+
+### ADR-008: 검색 처리 위치는 presentation 클라이언트 필터링
+**결정**: 할일 검색은 **presentation 레이어의 `TodoListNotifier`**에서 메모리 상 클라이언트 필터링으로 처리한다. `todoSearchQueryNotifierProvider`(@riverpod, `String` state)를 추가하고, 기존 `todoFilterNotifierProvider`와 함께 watch한 뒤 `title.toLowerCase().contains(query.trim().toLowerCase())` 조건으로 결합 필터링한다. data 레이어와 sembast Finder는 변경하지 않는다.
+**이유**: 본 MVP의 데이터 양은 단일 사용자/단일 PC 기준 수십~수백 건 수준이라 메모리 필터링이 충분히 빠르고, repository 인터페이스/UseCase 시그니처를 건드리지 않아 변경 범위가 presentation에 한정된다. 검색은 UI 상태(타이핑 중 즉시 반응)에 가까워 stream 재구독보다 클라이언트 필터가 자연스럽다.
+**트레이드오프**: 데이터가 수천 건 이상으로 늘면 메모리 비용/응답성이 떨어진다. 그 시점에는 `WatchTodos`에 `query` 파라미터를 추가하고 sembast `Finder(filter: Filter.matches('title', regex))` 로 푸시다운하는 별도 ADR로 이주한다.

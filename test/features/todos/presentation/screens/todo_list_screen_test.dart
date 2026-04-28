@@ -60,4 +60,79 @@ void main() {
 
     expect(find.text('아직 등록된 할일이 없습니다.'), findsOneWidget);
   });
+
+  testWidgets('검색어 입력 시 제목에 포함된 항목만 노출', (tester) async {
+    final repo = FakeTodoRepository(
+      initial: [
+        _todo(id: 'a', title: '보고서 작성', isCompleted: false),
+        _todo(id: 'b', title: '장보기', isCompleted: false),
+      ],
+    );
+    addTearDown(repo.dispose);
+
+    await tester.pumpWidget(
+      wrapForTest(const TodoListScreen(), repository: repo),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('보고서 작성'), findsOneWidget);
+    expect(find.text('장보기'), findsOneWidget);
+
+    await tester.enterText(find.byKey(const Key('todo_search_field')), '보고');
+    await tester.pumpAndSettle();
+
+    expect(find.text('보고서 작성'), findsOneWidget);
+    expect(find.text('장보기'), findsNothing);
+  });
+
+  testWidgets('미완료 탭 + 검색어가 결합되어 적용', (tester) async {
+    final repo = FakeTodoRepository(
+      initial: [
+        _todo(id: 'a', title: '보고서 작성', isCompleted: false),
+        _todo(id: 'b', title: '보고서 제출', isCompleted: true),
+        _todo(id: 'c', title: '장보기', isCompleted: false),
+      ],
+    );
+    addTearDown(repo.dispose);
+
+    await tester.pumpWidget(
+      wrapForTest(const TodoListScreen(), repository: repo),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('todo_filter_pending')));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byKey(const Key('todo_search_field')), '보고');
+    await tester.pumpAndSettle();
+
+    expect(find.text('보고서 작성'), findsOneWidget);
+    expect(find.text('보고서 제출'), findsNothing);
+    expect(find.text('장보기'), findsNothing);
+  });
+
+  testWidgets('검색어를 비우면 전체(필터 적용분)로 복귀', (tester) async {
+    final repo = FakeTodoRepository(
+      initial: [
+        _todo(id: 'a', title: '보고서 작성', isCompleted: false),
+        _todo(id: 'b', title: '장보기', isCompleted: false),
+      ],
+    );
+    addTearDown(repo.dispose);
+
+    await tester.pumpWidget(
+      wrapForTest(const TodoListScreen(), repository: repo),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byKey(const Key('todo_search_field')), '보고');
+    await tester.pumpAndSettle();
+    expect(find.text('장보기'), findsNothing);
+
+    await tester.enterText(find.byKey(const Key('todo_search_field')), '');
+    await tester.pumpAndSettle();
+
+    expect(find.text('보고서 작성'), findsOneWidget);
+    expect(find.text('장보기'), findsOneWidget);
+  });
 }

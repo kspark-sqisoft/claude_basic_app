@@ -177,9 +177,11 @@ forui의 `FTypography`를 통해 접근하거나, 단순한 경우 `Text(..., st
 
 ## 데스크톱 특화
 - **우클릭 컨텍스트 메뉴**: forui `FPopover` 또는 Material `MenuAnchor` + `MenuItemButton`.
+- **헤더 액션 영역**: `FHeader(actions: [...])` 우측에 보조 컨트롤(검색 필드, 환경설정 버튼 등)을 배치한다. 페이지 본문 폭을 좁히지 않고 데스크톱 도구의 일반적 레이아웃과 맞물린다. 액션 위젯은 `SizedBox(width: ...)` 로 폭을 명시적으로 제약해 헤더 우측 공간을 잠식하지 않게 한다.
 - **키보드 단축키**: `CallbackShortcuts` 또는 `Shortcuts` + `Actions`. MVP 권장 단축키:
   - `Ctrl+N` → 인라인 입력바 포커스
+  - `Ctrl+F` → 헤더 검색 필드 포커스
   - `Enter` → 입력바에서 저장
-  - `Esc` → 다이얼로그 닫기
+  - `Esc` → 다이얼로그 닫기 / 검색어 초기화
 - **창 크기/위치 기억**: 후속 작업에서 `window_manager` 검토.
 - **시스템 트레이/다중 창**: 별도 ADR로 결정.

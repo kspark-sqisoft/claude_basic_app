@@ -10,10 +10,11 @@ import '../../domain/usecases/toggle_todo_completed.dart';
 import '../../domain/usecases/update_todo.dart';
 import '../../domain/usecases/watch_todos.dart';
 import 'todo_filter_provider.dart';
+import 'todo_search_query_provider.dart';
 
 part 'todo_list_notifier.g.dart';
 
-// 화면이 구독하는 통합 Notifier. WatchTodos 스트림을 필터와 결합해 노출하고,
+// 화면이 구독하는 통합 Notifier. WatchTodos 스트림을 필터/검색어와 결합해 노출하고,
 // 변경 액션은 UseCase를 통해 repository에 위임한다.
 @riverpod
 class TodoListNotifier extends _$TodoListNotifier {
@@ -23,11 +24,12 @@ class TodoListNotifier extends _$TodoListNotifier {
   Stream<List<Todo>> build() async* {
     final repo = await ref.watch(todoRepositoryProvider.future);
     final filter = ref.watch(todoFilterProvider);
+    final query = ref.watch(todoSearchQueryProvider);
     final watch = WatchTodos(repo);
     yield* watch(const NoParams()).map(
       (either) => either.match<List<Todo>>(
         (failure) => throw failure,
-        (todos) => _applyFilter(todos, filter),
+        (todos) => _applyFilterAndSearch(todos, filter, query),
       ),
     );
   }
@@ -71,8 +73,17 @@ class TodoListNotifier extends _$TodoListNotifier {
   }
 }
 
-List<Todo> _applyFilter(List<Todo> todos, TodoFilter filter) => switch (filter) {
-  TodoFilter.all => todos,
-  TodoFilter.pending => todos.where((t) => !t.isCompleted).toList(),
-  TodoFilter.completed => todos.where((t) => t.isCompleted).toList(),
-};
+List<Todo> _applyFilterAndSearch(
+  List<Todo> todos,
+  TodoFilter filter,
+  String query,
+) {
+  final filtered = switch (filter) {
+    TodoFilter.all => todos,
+    TodoFilter.pending => todos.where((t) => !t.isCompleted).toList(),
+    TodoFilter.completed => todos.where((t) => t.isCompleted).toList(),
+  };
+  final q = query.trim().toLowerCase();
+  if (q.isEmpty) return filtered;
+  return filtered.where((t) => t.title.toLowerCase().contains(q)).toList();
+}

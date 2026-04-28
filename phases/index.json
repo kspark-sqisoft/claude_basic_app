@@ -4,6 +4,11 @@
       "dir": "0-mvp",
       "status": "completed",
       "completed_at": "2026-04-28T14:52:03+0900"
+    },
+    {
+      "dir": "1-search",
+      "status": "completed",
+      "completed_at": "2026-04-28T15:32:27+0900"
     }
   ]
 }
