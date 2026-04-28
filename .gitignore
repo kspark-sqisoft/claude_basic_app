@@ -1,0 +1,37 @@
+# Flutter / Dart / Pub
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+.metadata
+*.iml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Windows 빌드 산출물
+windows/flutter/ephemeral/
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugin_registrant.h
+windows/flutter/generated_plugins.cmake
+
+# 코드 생성 파일 (build_runner)
+*.g.dart
+*.freezed.dart
+
+# 환경 변수
+.env
+.env.*
+!.env.example
+
+# 로그
+*.log
+
+# phase execution outputs
+phases/**/phase*-output.json
+phases/**/step*-output.json
