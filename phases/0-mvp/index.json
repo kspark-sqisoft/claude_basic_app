@@ -45,7 +45,10 @@
     {
       "step": 5,
       "name": "todos-presentation",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-04-28T14:15:51+0900",
+      "summary": "todos/presentation 레이어 작성. TodoFilterNotifier(@riverpod, enum: all/pending/completed)와 TodoListNotifier(@riverpod, Stream<List<Todo>>)로 필터·목록 분리. TodoListScreen(FScaffold+FHeader+ConstrainedBox 1024px) + TodoInputBar/TodoFilterTabs(FTabs lifted)/TodoListItem(FCheckbox+lineThrough)/TodoEditDialog(FDialog + FCalendar) 위젯. FakeTodoRepository 기반 위젯 테스트 9건 + 전체 47건 통과, flutter analyze 0건, flutter build windows --debug 성공.",
+      "completed_at": "2026-04-28T14:30:00+0900"
     },
     {
       "step": 6,
