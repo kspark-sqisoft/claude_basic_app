@@ -40,7 +40,7 @@
       "status": "completed",
       "started_at": "2026-04-28T14:09:51+0900",
       "summary": "todos/data 레이어 작성. TodoModel(freezed+json_serializable, epoch ms 시간), TodoLocalDataSource(stringMapStoreFactory store('todos'), CacheException throw), TodoRepositoryImpl(StreamTransformer로 Either 변환), todoLocalDataSource/todoRepository provider(@riverpod). databaseFactoryMemory 기반 CRUD 테스트 통과.",
-      "completed_at": "2026-04-28T14:17:00+0900"
+      "completed_at": "2026-04-28T14:15:50+0900"
     },
     {
       "step": 5,
