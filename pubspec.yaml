@@ -15,6 +15,7 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.11.0
   sembast: ^3.8.6
+  path: ^1.9.0
   path_provider: ^2.1.5
   go_router: ^17.2.2
   fpdart: ^1.2.0
