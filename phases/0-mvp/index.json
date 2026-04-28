@@ -7,7 +7,8 @@
       "name": "project-setup",
       "status": "completed",
       "started_at": "2026-04-28T13:44:20+0900",
-      "summary": "Flutter 프로젝트 초기화 완료. pubspec.yaml에 forui ^0.21.3, sembast, flutter_riverpod, freezed, fpdart, uuid 등 의존성 추가. lib/main.dart에 빈 ProviderScope 골격 작성. flutter analyze/test 통과."
+      "summary": "Flutter 프로젝트 초기화 완료. pubspec.yaml에 forui ^0.21.3, sembast, flutter_riverpod, freezed, fpdart, uuid 등 의존성 추가. lib/main.dart에 빈 ProviderScope 골격 작성. flutter analyze/test 통과.",
+      "completed_at": "2026-04-28T13:49:50+0900"
     },
     {
       "step": 1,
