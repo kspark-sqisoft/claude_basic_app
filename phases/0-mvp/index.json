@@ -32,7 +32,7 @@
       "status": "completed",
       "started_at": "2026-04-28T14:02:11+0900",
       "summary": "todos/domain 레이어 작성. Todo entity(freezed), TodoRepository 인터페이스, UseCase 5종(WatchTodos/AddTodo/UpdateTodo/DeleteTodo/ToggleTodoCompleted) 모두 Either<Failure,T> 반환. uuid/now 주입식 + ValidationFailure 검증. 모든 단위 테스트 통과.",
-      "completed_at": "2026-04-28T14:08:22+0900"
+      "completed_at": "2026-04-28T14:09:51+0900"
     },
     {
       "step": 4,
