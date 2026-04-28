@@ -7,7 +7,7 @@
       "name": "search-feature",
       "status": "completed",
       "started_at": "2026-04-28T15:14:12+0900",
-      "completed_at": "2026-04-28T15:30:48+0900",
+      "completed_at": "2026-04-28T15:32:26+0900",
       "summary": "검색 기능 추가. todoSearchQueryProvider(@riverpod TodoSearchQueryNotifier, String state) 신규, TodoListNotifier가 (filter, query) 결합 필터링(_applyFilterAndSearch). TodoSearchField(FTextField, width 240) 위젯 신규, FHeader.suffixes에 배치. 컨트롤러 listener로 provider state 갱신, ref.listen으로 autoDispose 방지. domain/data 변경 0건. 위젯 테스트 5건 신규(검색 필드 2건 + 화면 통합 3건) + 전체 52건 통과, flutter analyze 0건, flutter build windows --debug 성공. 문서 4건(PRD/ADR-008/UI_GUIDE/PLAN_search) 함께 커밋."
     }
   ],
